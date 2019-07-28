@@ -1,9 +1,73 @@
+{{!-- <script src="../../server.js"></script> --}}
+<style>
+    h1 {
+        font-weight: bold;
+    }
+
+    body {
+        background: rgb(199, 67, 67);
+    }
+
+    .jumbotron {
+        background: lightgray;
+        color: black;
+        margin: 10px;
+        border-style: solid;
+        border-color: black;
+        border-width: 5px;
+    }
+
+    .card {
+        margin: 10px;
+    }
+
+    .link {
+        font-size: 10px;
+    }
+
+    img {
+        width: 150px;
+        height: 150px;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron">
-                <h1>Articles:</h1>
+                <img
+                    src="https://www.northeastern.edu/admissions/wp-content/uploads/2017/04/northeasternuniversity_logoseal.png">
+                <span>
+                    <h1>Northeastern University News Scraper</h1>
+                </span>
             </div>
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="article-cards">
+
+        </div>
+    </div>
+</div>
+<script src="../server.js"></script>
+<script>
+
+    $.get("/api/scraper", function (data) {
+        console.log(data);
+
+        for (var i = 0; i < 10; i++) {
+            $("#article-cards").append(` <div class="card">
+             <div class="card-body">
+                 <h4>${data[i].title}</h4>
+                 <p>${data[i].summary}</p>
+                  <p class="link">${data[i].link}</p>
+               </div>
+           </div>`);
+
+        }
+    });
+
+</script>
